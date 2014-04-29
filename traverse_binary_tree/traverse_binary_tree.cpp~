@@ -102,7 +102,7 @@ void PostorderWalkNonRecursively(BinaryTreeNode* p_node)
             cout << p_node->m_value << " "; // Postorder;
             pre_visited = p_node;
             node_stack.pop();
-            p_node = NULL;//注意 p_node 必须置为NULL
+            p_node = NULL;//注意 p_node 
         }
         else
             p_node = p_node->m_p_right; // 否则访问右孩子

@@ -1,42 +1,39 @@
-#include<iostream>
+#include <iostream>
+#include <algorithm>
 #include <cstring>
 using namespace std;
 
 
-void Swap(char* a, char* b)
+void Permutation(char *str, int len, int start)
 {
-    char tmp = *a;
-    *a = *b;
-    *b = tmp;
+	if(str == NULL || len <= 0 || start < 0)
+		return;
+	if(start == len)
+	{
+		cout << str << endl;
+		return;
+	}
+	for(int i = start; i < len; i++)
+	{
+		swap(str[start], str[i]);
+		Permutation(str, len, start+1);//note: 这里是start+1,表示排列的字符串较小一个;
+		swap(str[start], str[i]);
+	}
 }
 
-void Permutation(char* str, int length, int start)
+void Permutation(char *str)//让函数接口友好！！
 {
-    if(str == NULL || length < 0 || start < 0)
-        return;
-    if(start == length)
-    {
-        cout << str << endl;
-        return;
-    }
-    for(int i = start; i < length; i++)
-    {
-        Swap(&str[start], &str[i]);
-        Permutation(str, length, start+1); //note: 这里是start+1,表示排列的字符串较小一个;
-        Swap(&str[start], &str[i]);
-    }   
+	Permutation(str, strlen(str), 0);
 }
 
 void Test()
 {
-     char str[] = "abc";
-    //error, because "abc" is constant
-    //char *str = "abc";
-    Permutation(str, strlen(str), 0);
+	char str[] = "abc";
+	Permutation(str);
 }
 
-int main()
-{
-    Test();
-    return 0;
+
+int main() {
+	Test();
+	return 0;
 }
